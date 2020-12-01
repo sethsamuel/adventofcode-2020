@@ -1,38 +1,41 @@
-self.onmessage = async e => {
+self.onmessage = async (e) => {
   console.log("Message received", e);
   const { command, input } = e.data;
   if (command === "START") {
-    const lines = input.split("\n").map(l => parseInt(l));
+    const lines = input.split("\n").map((l) => parseInt(l));
     console.log(`${lines.length} lines of input`);
 
-    const fuelRequired = mass => {
-      //   for (let i = 0; i <= 100000000; i++) {
-      //     3 + 5;
-      //   }
-      const fuel = Math.max(0, Math.floor(mass / 3) - 2);
-      if (fuel > 0) {
-        return fuel + fuelRequired(fuel);
-      } else {
-        return fuel;
+    const data = lines.map((l) => parseInt(l));
+    const checkEntry = (i: number) => {
+      for (let j = 0; j < lines.length; j++) {
+        for (let k = 0; k < lines.length; k++)
+          if (
+            i !== j &&
+            j !== k &&
+            i !== k &&
+            data[i] + data[j] + data[k] === 2020
+          ) {
+            postMessage(
+              { command: "RESULT", result: data[i] * data[j] * data[k] },
+              null
+            );
+            return true;
+          }
       }
+
+      postMessage(
+        { command: "PROGRESS", complete: i, total: lines.length },
+        null
+      );
+      return false;
     };
 
-    let complete = 0;
-    let lastProgress = new Date().getTime();
-
-    const totalFuel = lines.reduce((sum, mass) => {
-      const newSum = sum + fuelRequired(mass);
-      complete++;
-      if (new Date().getTime() - lastProgress > 1 / 30) {
-        lastProgress = new Date().getTime();
-
-        postMessage({ command: "PROGRESS", complete, total: lines.length });
+    for (let i = 0; i < lines.length; i++) {
+      if (checkEntry(i)) {
+        break;
       }
-      return newSum;
-    }, 0);
-    postMessage({ command: "RESULT", result: totalFuel });
+    }
   }
-  //   const input = await import("./input.txt");
 };
 
 console.log("Worker loaded");
