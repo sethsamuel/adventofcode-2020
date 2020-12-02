@@ -1,15 +1,18 @@
+//@ts-nocheck
 import { h } from "preact";
 import { useState } from "preact/hooks";
 import { Block, InlineBlock, Col, Row } from "jsxstyle/preact";
 
 const inputs = {
-  //@ts-ignore
   1: import("../days/1/input.txt"),
+  2: import("../days/2/input.txt"),
 };
 
 const workers = {
   "1.1": new Worker("../days/1/part1.ts"),
   "1.2": new Worker("../days/1/part2.ts"),
+  "2.1": new Worker("../days/2/part1.ts"),
+  "2.2": new Worker("../days/2/part2.ts"),
 };
 
 const Day = ({ day }) => {

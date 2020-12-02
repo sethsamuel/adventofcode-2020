@@ -19,7 +19,7 @@ function animate() {
 
 requestAnimationFrame(animate);
 
-const days = Array(1)
+const days = Array(2)
   .fill(0)
   .map((_v, i) => i + 1);
 
