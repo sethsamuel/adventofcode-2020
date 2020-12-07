@@ -6,7 +6,7 @@
         "jsxFactory": "h",
 		"plugins": [			
         ],
-        "target": "ES2019"
+        "target": "ES2020"
 	},
 	"exclude": ["node_modules"],
 	"include": ["src"]
