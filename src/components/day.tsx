@@ -14,6 +14,7 @@ const inputs = {
   8: import("../days/8/input.txt"),
   9: import("../days/9/input.txt"),
   10: import("../days/10/input.txt"),
+  11: import("../days/11/input.txt"),
 };
 
 const workers = {
@@ -37,6 +38,8 @@ const workers = {
   "9.2": new Worker("../days/9/part2.ts"),
   "10.1": new Worker("../days/10/part1.ts"),
   "10.2": new Worker("../days/10/part2.ts"),
+  "11.1": new Worker("../days/11/part1.ts"),
+  "11.2": new Worker("../days/11/part2.ts"),
 };
 const Day = ({ day }) => {
   const [progress, setProgress] = useState(0);
